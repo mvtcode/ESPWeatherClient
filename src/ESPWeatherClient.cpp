@@ -73,7 +73,8 @@ static bool extractJsonRawBuf(const char* str, int strLen, int startPos,
 
 static bool executeWeatherFetch(float lat, float lon, const char *cityName, WeatherInfo &outWeather) {
     HTTPClient http;
-    http.setTimeout(8000);
+    http.setTimeout(25000);
+    http.setConnectTimeout(20000);
 
     char url[256];
     snprintf(url, sizeof(url),
@@ -82,6 +83,7 @@ static bool executeWeatherFetch(float lat, float lon, const char *cityName, Weat
 
     EWC_LOG_D("Fetching Open-Meteo: %s", url);
     http.begin(url);
+    http.setUserAgent("ESP32WeatherClient/1.0");
     int httpCode = http.GET();
     bool success = false;
 
