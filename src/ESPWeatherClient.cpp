@@ -73,8 +73,8 @@ static bool extractJsonRawBuf(const char* str, int strLen, int startPos,
 
 static bool executeWeatherFetch(float lat, float lon, const char *cityName, WeatherInfo &outWeather) {
     HTTPClient http;
-    http.setTimeout(25000);
-    http.setConnectTimeout(20000);
+    http.setTimeout(12000);
+    http.setConnectTimeout(10000);
 
     char url[256];
     snprintf(url, sizeof(url),
